@@ -3,6 +3,7 @@ function getComputerChoice() {
   const randomOption = options[Math.floor(Math.random() * options.length)];
   return randomOption;
 }
+
 function Game() {
   for (let i = 0; i < 5; i++) {
     let playerSelection = prompt("Choose Rock, Paper or scissors").toUpperCase();
@@ -27,7 +28,7 @@ function playRound(playerSelection,computerSelection) {
     } else if(playerSelection == computerSelection) {
         return "It's a tie!";
     } else {
-        return "Please, enter a valid option";
+        return "Please, enter a valid option.";
     }
 }
 
