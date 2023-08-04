@@ -1,34 +1,36 @@
+const playerText = document.querySelector("#playerText");
+const computerText = document.querySelector("#computerText");
+const resultText = document.querySelector("#resultText");
+const choiceBtns = document.querySelectorAll(".choiceBtn");
+
+let player;
+let computer;
+let result;
+
 function getComputerChoice() {
   let options = ["ROCK", "PAPER", "SCISSORS"];
   const randomOption = options[Math.floor(Math.random() * options.length)];
   return randomOption;
 }
 
-function Game() {
-  for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Choose Rock, Paper or scissors").toUpperCase();
-    let computerSelection = getComputerChoice();
-    console.log("Player: " + playerSelection + " VS " +"Computer: " + computerSelection)
-    console.log(playRound(playerSelection,computerSelection))
+choiceBtns.forEach((button) =>
+  button.addEventListener("click", () => {
+    player = button.textContent;
+    computer = getComputerChoice();
+    playerText.textContent = `Player: ${player}`;
+    computerText.textContent = `Computer: ${computer}`;
+    resultText.textContent = checkWinner();
+  })
+);
+
+function checkWinner() {
+  if (player == computer) {
+    return "Draw!";
+  } else if (computer == "ROCK") {
+    return player == "PAPER" ? "You Win!" : "You Lose!";
+  } else if (computer == "PAPER") {
+    return player == "SCISSORS" ? "You Win!" : "You Lose!";
+  } else if (computer == "SCISSORS") {
+    return player == "ROCK" ? "You Win!" : "You Lose!";
   }
 }
-function playRound(playerSelection,computerSelection) {
-    if(playerSelection == "ROCK" && computerSelection == "PAPER") {
-        return "The computer chose PAPER. You lost!";
-    } else if(playerSelection == "ROCK" && computerSelection == "SCISSORS") {
-        return "The computer chose SCISSORS. You won!";
-    } else if(playerSelection == "PAPER" && computerSelection == "ROCK") {
-        return "The computer chose ROCK. You won!";
-    } else if(playerSelection == "PAPER" && computerSelection == "SCISSORS") {
-        return "The computer chose SCISSORS. You lost!";
-    } else if(playerSelection == "SCISSORS" && computerSelection == "PAPER") {
-        return "The computer chose PAPER. You won!";
-    } else if(playerSelection == "SCISSORS" && computerSelection == "ROCK") {
-        return "The computer chose ROCK. You lost!";
-    } else if(playerSelection == computerSelection) {
-        return "It's a tie!";
-    } else {
-        return "Please, enter a valid option.";
-    }
-}
-
